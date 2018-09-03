@@ -1,0 +1,74 @@
+ //Ejemplo 1
+
+Observable<List<String>> observableList = Observable.just(getCarList());
+
+observableList.suscribe(new Observer<List<String>>() {
+
+	@Override
+	public void onCompleted() { }
+
+
+    @Override
+	public void onError(Throwable e) {
+	    e.printStackTrace();
+	}
+
+	@Override
+	public void onNext(List <String> cars) {
+ 		mSimpleStringAdapter.setStrings(cars);
+	}
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ //Ejemplo 2
+
+Observable<List<String>> postsObservable = Observable.fromCallable(new Callable<List<String>>() {
+
+    @Override
+    public List<String> call(){
+        return mRestClientApi.getFriendsPosts();
+    }
+});
+
+
+postsSuscription = postsObservable
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(new Observer<List<String>>() {
+
+        @Override
+        public void onCompleted() { }
+
+
+        @Override
+        public void onError(Throwable e) {
+            e.printStackTrace();
+        }
+
+        @Override
+        public void onNext(List <String> posts) {
+            displayCurrentPosts(posts);
+        }
+
+});
+
+
+...
+
+//En algun momento, cuando quermos dejar de recibir información...
+if(postsSuscription != null && ! postsSuscription.isUnsuscribed()){
+    postsSuscription.unsuscribe();
+}

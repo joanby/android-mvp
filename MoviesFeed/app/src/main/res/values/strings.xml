@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MoviesFeed</string>
+    <string name="placeholder_movie">50 Sombras de Grey</string>
+    <string name="placeholder_country">Reino Unido</string>
+</resources>

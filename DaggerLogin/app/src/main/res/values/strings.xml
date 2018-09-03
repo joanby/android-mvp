@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DaggerLogin</string>
+    <string name="first_name">Nombre</string>
+    <string name="last_name">Apellido</string>
+    <string name="login_text">Entrar</string>
+    <string name="main_activity_name">Entrar en la red</string>
+</resources>
